@@ -2,7 +2,7 @@ import { Connection, PublicKey } from '@solana/web3.js';
 import { Program, AnchorProvider, web3, utils, BN } from '@project-serum/anchor';
 import idl from './solana_chess.json';
 
-const programID = new PublicKey('YOUR_PROGRAM_ID');
+const programID = new PublicKey('Hp8cLdkPkHkSW9PbXutVUmoDR8pWbrqXLRbY3TmVj5kn');
 const opts = {
   preflightCommitment: 'processed'
 };
