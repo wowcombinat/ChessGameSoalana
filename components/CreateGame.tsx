@@ -1,9 +1,11 @@
 import { FC, useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useConnection } from '@solana/wallet-adapter-react';
 
 const CreateGame: FC = () => {
   const [stake, setStake] = useState<number>(0.1);
   const { connected, publicKey } = useWallet();
+  const { connection } = useConnection();
 
   const handleCreateGame = async () => {
     if (!connected || !publicKey) {
@@ -18,14 +20,14 @@ const CreateGame: FC = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          playerAddress: publicKey.toBase58(),
-          stake: stake,
+          stake,
+          walletPublicKey: publicKey.toBase58(),
         }),
       });
 
       if (response.ok) {
-        const game = await response.json();
-        alert(`Game created with ID: ${game.id}`);
+        const { gameId } = await response.json();
+        alert(`Game created with ID: ${gameId}`);
       } else {
         alert('Failed to create game');
       }
@@ -35,25 +37,7 @@ const CreateGame: FC = () => {
     }
   };
 
-  return (
-    <div className="mb-4">
-      <input
-        type="number"
-        value={stake}
-        onChange={(e) => setStake(Number(e.target.value))}
-        className="border p-2 mr-2"
-        step="0.1"
-        min="0.1"
-      />
-      <button
-        onClick={handleCreateGame}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-        disabled={!connected}
-      >
-        Create Game
-      </button>
-    </div>
-  );
+  // ... rest of the component
 };
 
 export default CreateGame;
