@@ -4,6 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import dynamic from 'next/dynamic';
 import styles from '../styles/Home.module.css';
 import ChessBoard from '../components/ChessBoard';
+import CreateGame from '../components/CreateGame';
 
 const WalletMultiButtonDynamic = dynamic(
   async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
@@ -31,6 +32,7 @@ const Home: NextPage = () => {
         {connected ? (
           <div>
             <p>Your wallet is connected!</p>
+            <CreateGame />
             <ChessBoard />
           </div>
         ) : (
