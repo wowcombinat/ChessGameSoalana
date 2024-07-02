@@ -41,14 +41,14 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        
-          href="https://solana.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by Solana
-        </a>
-      </footer>
+  
+    href="https://solana.com"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Powered by Solana
+     </a>
+     </footer>
     </div>
   );
 };
