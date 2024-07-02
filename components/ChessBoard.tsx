@@ -1,9 +1,14 @@
 import { FC, useState, useEffect } from 'react';
-import { Chess } from 'chess.js';
+import { Chess, Square } from 'chess.js';
+
+interface Piece {
+  type: string;
+  color: string;
+}
 
 const ChessBoard: FC = () => {
   const [game, setGame] = useState<Chess>(new Chess());
-  const [board, setBoard] = useState<string[][]>([]);
+  const [board, setBoard] = useState<(Piece | null)[][]>([]);
 
   useEffect(() => {
     updateBoard();
@@ -14,7 +19,7 @@ const ChessBoard: FC = () => {
   };
 
   const handleSquareClick = (row: number, col: number) => {
-    const square = String.fromCharCode(97 + col) + (8 - row);
+    const square = String.fromCharCode(97 + col) + (8 - row) as Square;
     const moves = game.moves({ square: square, verbose: true });
 
     if (moves.length > 0) {
