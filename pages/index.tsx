@@ -1,35 +1,52 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import WalletConnect from '../components/WalletConnect';
+import { useWallet } from '@solana/wallet-adapter-react';
+import dynamic from 'next/dynamic';
+import styles from '../styles/Home.module.css';
 import ChessBoard from '../components/ChessBoard';
-import GameList from '../components/GameList';
-import CreateGame from '../components/CreateGame';
+
+const WalletMultiButtonDynamic = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
 
 const Home: NextPage = () => {
+  const { connected } = useWallet();
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className={styles.container}>
       <Head>
-        <title>Шахматы на Solana</title>
-        <meta name="description" content="Играйте в шахматы на блокчейне Solana" />
+        <title>Solana Chess</title>
+        <meta name="description" content="Chess game on Solana blockchain" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">Шахматы на Solana</h1>
-        <WalletConnect />
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <main className={styles.main}>
+        <h1 className={styles.title}>
+          Welcome to Solana Chess
+        </h1>
+
+        <WalletMultiButtonDynamic />
+
+        {connected ? (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Создать игру</h2>
-            <CreateGame />
-            <h2 className="text-2xl font-bold mb-4 mt-8">Список игр</h2>
-            <GameList />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Шахматная доска</h2>
+            <p>Your wallet is connected!</p>
             <ChessBoard />
           </div>
-        </div>
+        ) : (
+          <p>Please connect your wallet to play</p>
+        )}
       </main>
+
+      <footer className={styles.footer}>
+        
+          href="https://solana.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by Solana
+        </a>
+      </footer>
     </div>
   );
 };
