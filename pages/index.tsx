@@ -1,18 +1,18 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useWallet } from '@solana/wallet-adapter-react';
-import dynamic from 'next/dynamic';
-import styles from '../styles/Home.module.css';
-import ChessBoard from '../components/ChessBoard';
-import CreateGame from '../components/CreateGame';
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import { useWallet } from '@solana/wallet-adapter-react'
+import dynamic from 'next/dynamic'
+import styles from '../styles/Home.module.css'
+import ChessBoard from '../components/ChessBoard'
+import CreateGame from '../components/CreateGame'
 
 const WalletMultiButtonDynamic = dynamic(
   async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
   { ssr: false }
-);
+)
 
 const Home: NextPage = () => {
-  const { connected } = useWallet();
+  const { connected } = useWallet()
 
   return (
     <div className={styles.container}>
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
