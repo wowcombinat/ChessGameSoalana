@@ -1,0 +1,32 @@
+{
+  "version": "0.1.0",
+  "name": "solana_chess",
+  "instructions": [
+    {
+      "name": "initializeGame",
+      "accounts": [
+        {
+          "name": "game",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "stake",
+          "type": "u64"
+        }
+      ]
+    }
+  ]
+}
