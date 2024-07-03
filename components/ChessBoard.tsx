@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from 'react';
-import { Chess, Square } from 'chess.js';
+import { Chess } from 'chess.js';
 
 interface Piece {
   type: string;
@@ -19,36 +19,22 @@ const ChessBoard: FC = () => {
   };
 
   const handleSquareClick = (row: number, col: number) => {
-    const square = String.fromCharCode(97 + col) + (8 - row) as Square;
-    const moves = game.moves({ square: square, verbose: true });
-
-    if (moves.length > 0) {
-      const move = moves[0];
-      game.move(move);
-      updateBoard();
-    }
+    // Implement move logic here
   };
 
   return (
-    <div className="grid grid-cols-8 gap-0 w-96 h-96 border border-gray-300">
+    <div className="chess-board">
       {board.map((row, rowIndex) =>
         row.map((piece, colIndex) => (
           <div
             key={`${rowIndex}-${colIndex}`}
-            className={`w-12 h-12 flex items-center justify-center ${
-              (rowIndex + colIndex) % 2 === 0 ? 'bg-white' : 'bg-gray-200'
-            }`}
+            className={`square ${(rowIndex + colIndex) % 2 === 0 ? 'light' : 'dark'}`}
             onClick={() => handleSquareClick(rowIndex, colIndex)}
           >
             {piece && (
-              <span className="text-3xl">
-                {piece.type === 'p' ? (piece.color === 'w' ? '♙' : '♟︎') :
-                 piece.type === 'r' ? (piece.color === 'w' ? '♖' : '♜') :
-                 piece.type === 'n' ? (piece.color === 'w' ? '♘' : '♞') :
-                 piece.type === 'b' ? (piece.color === 'w' ? '♗' : '♝') :
-                 piece.type === 'q' ? (piece.color === 'w' ? '♕' : '♛') :
-                 piece.type === 'k' ? (piece.color === 'w' ? '♔' : '♚') : ''}
-              </span>
+              <div className={`piece ${piece.color}`}>
+                {piece.type}
+              </div>
             )}
           </div>
         ))
