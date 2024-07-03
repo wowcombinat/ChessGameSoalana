@@ -6,13 +6,13 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Solana Chess</title>
-        <meta name="description" content="Chess game on Solana blockchain" />
+        <title>Chess Game</title>
+        <meta name="description" content="Simple chess game" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1>Welcome to Solana Chess</h1>
+        <h1>Welcome to Chess Game</h1>
         <ChessBoard />
       </main>
     </div>
