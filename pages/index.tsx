@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import ChessBoard from '../components/ChessBoard'
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
 
       <main>
         <h1>Welcome to Solana Chess</h1>
-        <p>Content coming soon</p>
+        <ChessBoard />
       </main>
     </div>
   )
